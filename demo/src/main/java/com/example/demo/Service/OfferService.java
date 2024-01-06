@@ -38,10 +38,10 @@ public class OfferService {
         offerRepository.save(offer);
     }
 
-    public void updateOffer(Integer id,OfferDTO offerDTO){
-        Offer offer = offerRepository.findOfferById(id);
+    public void updateOffer(Integer offer_id,OfferDTO offerDTO){
+        Offer offer = offerRepository.findOfferById(offer_id);
         if (offer == null){
-            throw new ApiException("invalid");
+            throw new ApiException("invalid id");
         }
         if (offer.getRfp().isComplete()){
             throw new ApiException("Sorry you cannot updated this offer, the proposal is completed");

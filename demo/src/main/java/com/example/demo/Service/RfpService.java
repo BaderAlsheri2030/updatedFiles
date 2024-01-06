@@ -55,12 +55,13 @@ public class RfpService {
         rfp.setTitle(rfpDTO.getTitle());
         rfpRepository.save(rfp);
     }
+
     public void deleteRfp(Integer rfp_id){
         Rfp rfp = rfpRepository.findRfpById(rfp_id);
         if (rfp == null){
             throw new ApiException("invalid");
         }
-
+        rfpRepository.delete(rfp);
     }
 
 }
