@@ -24,5 +24,6 @@ public class RfpDTO {
     private String service_details;
     @NotNull(message = "title cannot be null")
     private String title;
+    private String location;
 
 }

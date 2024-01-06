@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,5 +48,7 @@ public class Rfp {
     @JsonIgnore
     private Competition competition;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "rfp")
+    private Set<Offer> offers;
 
 }
