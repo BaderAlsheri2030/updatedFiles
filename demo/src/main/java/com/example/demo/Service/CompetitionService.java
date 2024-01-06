@@ -27,7 +27,7 @@ public class CompetitionService {
         competitionRepository.save(competition);
     }
 
-    public void updateCompetition(Integer id,Competition competition){
+    public void updateCompetition(Integer id){
         Competition competition1 = competitionRepository.findCompetitionById(id);
         Set<Rfp> rfps = new HashSet<>();
         if (competition1 == null){

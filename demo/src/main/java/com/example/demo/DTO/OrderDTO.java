@@ -14,7 +14,6 @@ import java.util.Set;
 public class OrderDTO {
     @Pattern(regexp = "^(accepted|rejected|completed)$")
     private String status;
-    private Integer quantity;
     private double totalPrice;
     private Integer product_id;
     private Integer service_id;

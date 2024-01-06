@@ -20,6 +20,8 @@ public class Product {
     private String name;
     @Column(columnDefinition = "double not null")
     private double price;
+    @Column(columnDefinition = "int not null")
+    private Integer stock;
 
 
 
