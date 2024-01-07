@@ -13,4 +13,5 @@ OffersRepository extends JpaRepository<Offer,Integer> {
     List<Offer> findAllByRfpId(Integer id);
     List<Offer> findOffersByRfpIdAndPriceBetween(Integer id,double min,double max);
     List<Offer> findAllByProviderIdAndStatusEquals(Integer id,String a);
+    Offer findOfferByProviderCompanyName(String name);
 }

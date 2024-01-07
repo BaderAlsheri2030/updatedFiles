@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +23,10 @@ public class RfpService {
     private final CompetitionRepository competitionRepository;
     private final CompanyRepository companyRepository;
     private final OffersRepository offersRepository;
-    private final RfpDTORepository rfpDTORepository;
+
+
+
+
 
     public List<Rfp> getAll(){
         return rfpRepository.findAll();
@@ -38,7 +43,6 @@ public class RfpService {
         }
         Rfp rfp = new Rfp(null,rfpDTO.getDescription(),rfpDTO.getReference_number(),rfpDTO.getCompetition_type(),rfpDTO.getDead_line(),rfpDTO.getLocation(),rfpDTO.getStartDate(),rfpDTO.getContract_length(),rfpDTO.getService_details(),rfpDTO.getTitle(),rfpDTO.isComplete(),rfpDTO.getName(),rfpDTO.getTime_left(),company,competition,null);
         rfpRepository.save(rfp);
-        rfpDTORepository.save(rfpDTO);
     }
 
     public void updateRfp(Integer rfp_id,RfpDTO rfpDTO,Integer company_id){
@@ -64,7 +68,6 @@ public class RfpService {
             }
         }
         rfpRepository.save(rfp);
-        rfpDTORepository.save(rfpDTO);
     }
 
     public void deleteRfp(Integer rfp_id){
@@ -164,6 +167,7 @@ public class RfpService {
         }
         return rfps;
     }
+
 
 
 

@@ -2,9 +2,11 @@ package com.example.munafis.Service;
 
 import com.example.munafis.API.ApiException;
 import com.example.munafis.DTO.OfferDTO;
+import com.example.munafis.Model.Company;
 import com.example.munafis.Model.Offer;
 import com.example.munafis.Model.Provider;
 import com.example.munafis.Model.Rfp;
+import com.example.munafis.Repository.CompanyRepository;
 import com.example.munafis.Repository.OffersRepository;
 import com.example.munafis.Repository.ProviderRepository;
 import com.example.munafis.Repository.RfpRepository;
@@ -19,6 +21,7 @@ public class OfferService {
     private final OffersRepository offerRepository;
     private final RfpRepository rfpRepository;
     private final ProviderRepository providerRepository;
+    private final CompanyRepository companyRepository;
     public List<Offer> getAllOffers(){
         return offerRepository.findAll();
     }
@@ -62,6 +65,30 @@ public class OfferService {
             throw new ApiException("you can't withdraw the offer, contact the company that received your offer");
         }
         offerRepository.delete(offer);
+    }
+
+    //only company proposal creator
+    public Offer findMyRfpOfferByProviderName(Integer company_id,Integer rfp_id,String name){
+        Company company = companyRepository.findCompanyById(company_id);
+        Offer offer1 = null;
+        Rfp rfp1 = new Rfp();
+        for (Rfp rfp:company.getRfps()){
+            if (rfp.getId().equals(rfp_id)){
+                rfp1 = rfpRepository.findRfpById(rfp.getId());
+            }
+        }
+        if(rfp1 == null){
+            throw new ApiException("proposal not found");
+        }
+        for (Offer offer: rfp1.getOffers()){
+            if (offer.getProvider().getCompanyName().equalsIgnoreCase(name)){
+                offer1 = offer;
+            }
+        }
+        if (offer1 == null){
+            throw new ApiException("no results found");
+        }
+        return offer1;
     }
 
 }
