@@ -113,6 +113,24 @@ public class RfpService {
         rfpRepository.save(rfp);
 
     }
+    public void rejectOffer(Integer rfp_id,Integer company_id,Integer offer_id){
+        Company company = companyRepository.findCompanyById(company_id);
+        Rfp rfp = rfpRepository.findRfpById(rfp_id);
+        Offer offer = offersRepository.findOfferById(offer_id);
+        for (Rfp rfp1:company.getRfps()){
+            if (rfp1.getId().equals(rfp.getId())){
+                for (Offer offer1:rfp1.getOffers()){
+                    if (offer.getId().equals(offer1.getId())){
+                        offer1.setStatus("rejected");
+                        offersRepository.save(offer1);
+                        break;
+                    }
+
+                }
+            }
+        }
+        rfpRepository.save(rfp);
+    }
 
     //add company authentication for security
     //company view rfp received offers
